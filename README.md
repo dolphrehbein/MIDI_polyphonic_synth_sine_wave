@@ -7,4 +7,4 @@ On the Arduino Mega wire pins 30-37 to the R2R DAC from the Most Signifigant Bit
 A better explanation can be found on Wikipedia https://en.wikipedia.org/wiki/Resistor_ladder
 # MIDI input description
 It is possible to wire the data pin directly to your Rxn port on your Arduino, but it is suggested that you use an optocoupler as described on the MIDI.org website https://www.midi.org/specifications-old/item/midi-din-electrical-specification
-I found this youtube video do be helpful https://www.youtube.com/watch?v=GxfHijjn0ZM
+I found this youtube video to be helpful https://www.youtube.com/watch?v=GxfHijjn0ZM
