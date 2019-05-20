@@ -56,12 +56,16 @@ class Note
       {
         case 0:
           sample = (pgm_read_byte(&quarterSineWave[index]) * velocity) >> 7;
+          break;
         case 1:
           sample = ((pgm_read_byte(&quarterSineWave[16383 - index])) * velocity) >> 7;
+          break;
         case 2:
           sample = (( -1 * pgm_read_byte(&quarterSineWave[index])) * velocity) >> 7;
+          break;
         case 3:
           sample = (( -1 * pgm_read_byte(&quarterSineWave[16383 - index])) * velocity) >> 7;
+          break;
       }
       
       //Increment the index and the quadrant and check for overflows.
@@ -132,12 +136,15 @@ void setup() {
   DDRC = 255;
 
   //Put timer 5 in clear timer on compare mode. See Atmel atmega 2560 Datasheet.
-  TCCR5A = (1 << COM5A1);
+  TCCR5A = 0;
   TCCR5B = (1 << WGM52) | (1 << CS50);
-  TIMSK5 = (1 << OCIE5A);
   //Set the compare value to the clockspeed/sample rate. 
+  //Sample rate was chosen to be half the LUT size to avoid rounding errors when calculating step table.
   //This will cause the interrupt to occur at the sample rate.
-  OCR5A = 16000000 / 32768;
+  OCR5A = 16000000 /32768;
+  //Set the mask bit for the interrupt to 1 to enable the timer
+  TIMSK5 = (1 << OCIE5A);
+  
   
 
   //Initialize note map with -1 for every index.
